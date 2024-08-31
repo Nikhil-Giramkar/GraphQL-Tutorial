@@ -36,5 +36,33 @@ console.log(`Apollo server ready at ${url}`)
 Run following command in terminal
     node index.js
 
-Npow the apollo server is up and runnning at port 4000
+Now the apollo server is up and runnning at port 4000
 */
+
+/**
+ * Now you can try following operations on Apollo Sandbox
+ 
+query GetAuthorDetails {
+  authors {
+    id,
+    name,
+    verified
+  }
+}
+
+query GetReviewRatingAndContent {
+  reviews {
+    rating,
+    content
+  }
+}
+
+
+query GetGameTitles {
+  games {
+    id,
+    title
+  }
+}
+
+ */
