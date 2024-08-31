@@ -1,11 +1,12 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 
-//Setup graphql server
+import { typeDefinitions } from "./schema";
 
+//Setup graphql server
 const server = new ApolloServer({
     //type definitions : data type definitions of the data and relation with other data
-
+    typeDefs: typeDefinitions,
     //resoolvers: functions that determine how we respond to queries
 })
 
