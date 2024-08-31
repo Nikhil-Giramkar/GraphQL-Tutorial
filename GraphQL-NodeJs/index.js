@@ -6,6 +6,8 @@ import _db from "./_db.js";
 
 const resolvers = {
     Query: {
+
+        //Get ALL
         games(){
             return _db.games
         },
@@ -14,6 +16,17 @@ const resolvers = {
         },
         authors(){
             return _db.authors
+        },
+
+        //Get Single based on Arg
+        review(_, args) {
+          return _db.reviews.find(x => x.id === args.id)  
+        },
+        game(_, args){
+          return _db.games.find(y => y.id === args.id)
+        },
+        author(_,args){
+          return _db.authors.find(z => z.id === args.id)
         }
     }
 }
@@ -64,5 +77,17 @@ query GetGameTitles {
     title
   }
 }
+
+query GetReviewById($reviewId: ID!) {
+  review(id: $reviewId) {
+    id,
+    rating, 
+    content
+  }
+}
+  ----
+  { 
+  "reviewId": 1
+  }
 
  */

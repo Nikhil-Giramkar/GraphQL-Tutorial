@@ -22,6 +22,10 @@ type Query {
     reviews: [Review]
     games:  [Game]
     authors: [Author]
+
+    review(id: ID!): Review!
+    game(id: ID!): Game!
+    author(id: ID!): Author!
 }
 `
 
@@ -43,5 +47,9 @@ Data Types supported in Graphql
     A mandatory Query type needs to be deined
     Which will expose these schemas when queried
 
-    when user queries for reviews, he will get list of Review
+    when user queries for reviews, he will get list of Review.
+
+    How to get a single review from an Id (get by id) ?
+    For that we will expose one more endpoint in Query type
+    and a resolver for it in index.js too
 */
