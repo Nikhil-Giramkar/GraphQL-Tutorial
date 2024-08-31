@@ -49,6 +49,33 @@ const resolvers = {
       author(parent){
         return _db.authors.find(a => a.id === parent.author_id)
       }
+    },
+    Mutation: {
+      deleteGame(_, args) {
+        //Just mocking the Delete operation
+        _db.games = _db.games.filter(g => g.id !== args.id)
+        return _db.games
+      },
+
+      addGame(_,args) {
+        let game = {
+          ...args.gameInput,
+          id: Math.floor(Math.random() * 10000).toString()
+        }
+        _db.games.push(game)
+        return game
+      },
+
+      updateGame(_, args){
+        _db.games = _db.games.map(g => {
+          if(g.id === args.id) {
+            return {...g, ...args.edits}
+          }
+          return g
+        })
+
+        return _db.games.find(g => g.id === args.id)
+      }
     }
 }
 
@@ -83,7 +110,7 @@ query GetAuthorDetails {
     verified
   }
 }
-
+---------------------------
 query GetReviewRatingAndContent {
   reviews {
     rating,
@@ -91,13 +118,14 @@ query GetReviewRatingAndContent {
   }
 }
 
-
+-------------------------
 query GetGameTitles {
   games {
     id,
     title
   }
 }
+----------------------
 
 query GetReviewById($reviewId: ID!) {
   review(id: $reviewId) {
@@ -111,7 +139,7 @@ query GetReviewById($reviewId: ID!) {
   "reviewId": 1
   }
 
-
+-------------------------
   query GetReviewById($reviewId: ID!) {
   review(id: $reviewId) {
     id,
@@ -125,5 +153,44 @@ query GetReviewById($reviewId: ID!) {
     }
   }
 }
+-------------
+mutation GameDeleter($deleteGameId: ID!){
+  deleteGame(id: $deleteGameId) {
+    platform,
+    title
+  }
+}
 
+--------------------------
+
+mutation CreateGame($gameInput: AddGameInput!){
+  addGame(gameInput: $gameInput) {
+    id,
+    title, 
+    platform
+  }
+}
+
+{
+  "gameInput": {
+    "title": "a new game",
+    "platform": ["Plat1", "Plat2"]
+  }
+}
+----------------------------------------
+
+mutation UpdateGame($id: ID!, $edits: EditInput!){
+  updateGame(id: $id, edits: $edits) {
+    id,
+    title,
+    platform
+  }
+}
+
+{
+  "id": 1,
+  "edits": {
+    "title": "Nikhil"
+  }
+}
  */
