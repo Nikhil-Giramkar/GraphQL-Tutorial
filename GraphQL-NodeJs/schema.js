@@ -1,6 +1,7 @@
 //In this file we define the type definitions
 
-export const typeDefinitions = `#graphql
+export const typeDe
+fs = `#graphql
 
 type Game {
     id: ID!
