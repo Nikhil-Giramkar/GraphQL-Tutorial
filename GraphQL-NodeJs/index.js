@@ -28,6 +28,27 @@ const resolvers = {
         author(_,args){
           return _db.authors.find(z => z.id === args.id)
         }
+    },
+    //Query should be just used as an entrypoint to these schemas.
+    //To define relation between any 2 schemas, we must create a separate query
+
+    Game: {
+      reviews(parent){ //User may ask for all reviews of a game
+        return _db.reviews.filter(r => r.game_id === parent.id) // parent Id = args Id sent in root query
+      }
+    },
+    Author: {
+      reviews(parent){ //user may ask for all reviews written by the user
+        return _db.reviews.filter(r => r.author_id === parent.id)
+      }
+    },
+    Review: {
+      game(parent) { //User may want to get game info from review
+        return _db.games.find(g => g.id === parent.game_id ) //note: parent here = review (from DB.js), hence we can get game_id, even though not defined in Review type  in schema.js
+      },
+      author(parent){
+        return _db.authors.find(a => a.id === parent.author_id)
+      }
     }
 }
 
@@ -89,5 +110,20 @@ query GetReviewById($reviewId: ID!) {
   { 
   "reviewId": 1
   }
+
+
+  query GetReviewById($reviewId: ID!) {
+  review(id: $reviewId) {
+    id,
+    rating, 
+    content,
+    game {
+      title,
+      reviews {
+        rating
+      }
+    }
+  }
+}
 
  */

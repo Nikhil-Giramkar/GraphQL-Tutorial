@@ -4,18 +4,25 @@ type Game {
     id: ID!
     title: String
     platform: [String!]!
+
+    reviews: [Review!]
 }
 
 type Review{
     id: ID!
     rating: Int!
     content: String!
+
+    game: Game!
+    author: Author!
 }
 
 type Author {
     id: ID!
     name: String!
     verified: Boolean!
+    
+    reviews: [Review!]
 }
 
 type Query {
@@ -52,4 +59,16 @@ Data Types supported in Graphql
     How to get a single review from an Id (get by id) ?
     For that we will expose one more endpoint in Query type
     and a resolver for it in index.js too
+
+
+    The relation between these tables is such thAT
+
+    Any Author can give review on any Game
+    A review will contain authorId and game Id - bridge for relation
+
+    So, an author can give multiple reviews hence contains array of Review
+
+    A game can have multiple reviews
+
+    A review must always have info of which author gave review on which game
 */
