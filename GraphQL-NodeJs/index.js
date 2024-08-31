@@ -1,8 +1,8 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
 
-import { typeDefs } from "./schema";
-import _db from "./_db";
+import { typeDefs } from "./schema.js";
+import _db from "./_db.js";
 
 const resolvers = {
     Query: {
@@ -30,4 +30,11 @@ const { url } = await startStandaloneServer(server, {
     listen: { port: 4000}
 })
 
-console.log("Apollo server ready at", 4000)
+console.log(`Apollo server ready at ${url}`)
+
+/* 
+Run following command in terminal
+    node index.js
+
+Npow the apollo server is up and runnning at port 4000
+*/

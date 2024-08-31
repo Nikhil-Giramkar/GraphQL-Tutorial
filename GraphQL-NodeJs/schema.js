@@ -1,7 +1,4 @@
-//In this file we define the type definitions
-
-export const typeDe
-fs = `#graphql
+export const typeDefs = `#graphql
 
 type Game {
     id: ID!
@@ -24,11 +21,15 @@ type Author {
 type Query {
     reviews: [Review]
     games:  [Game]
-    auhors: [Author]
+    authors: [Author]
 }
 `
 
 /*
+
+//In this file we define the type definitions
+
+
 Data Types supported in Graphql
     ID
     int
